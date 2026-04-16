@@ -1,7 +1,9 @@
+// SELECT ELEMENTS
 const form = document.getElementById("jobForm");
 const jobList = document.getElementById("jobList");
 const searchInput = document.getElementById("search");
 
+// LOAD DATA
 let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
 let editIndex = null;
 
@@ -10,7 +12,7 @@ function displayJobs(data = jobs) {
   jobList.innerHTML = "";
 
   if (data.length === 0) {
-    jobList.innerHTML = "<p>No applications yet.</p>";
+    jobList.innerHTML = "<p>No applications yet. Start tracking now!</p>";
     return;
   }
 
@@ -18,18 +20,11 @@ function displayJobs(data = jobs) {
     const div = document.createElement("div");
     div.classList.add("job");
 
-    // STATUS COLOR
-    let color = "gray";
-    if (job.status === "Interview") color = "blue";
-    if (job.status === "Offer") color = "green";
-    if (job.status === "Rejected") color = "red";
-
-    div.style.borderLeftColor = color;
-
     div.innerHTML = `
-      <strong>${job.company}</strong> - ${job.role}<br>
-      Status: ${job.status}<br>
-      Notes: ${job.notes || "None"}<br>
+      <h3>${job.company}</h3>
+      <p><strong>${job.role}</strong></p>
+      <p>Status: ${job.status}</p>
+      <p>${job.notes || ""}</p>
       <button onclick="editJob(${index})">Edit</button>
       <button onclick="deleteJob(${index})">Delete</button>
     `;
@@ -40,16 +35,22 @@ function displayJobs(data = jobs) {
   updateDashboard();
 }
 
-// ADD / UPDATE JOB
+// ADD OR UPDATE JOB
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
   const job = {
-    company: document.getElementById("company").value,
-    role: document.getElementById("role").value,
+    company: document.getElementById("company").value.trim(),
+    role: document.getElementById("role").value.trim(),
     status: document.getElementById("status").value,
-    notes: document.getElementById("notes").value
+    notes: document.getElementById("notes").value.trim()
   };
+
+  // VALIDATION
+  if (!job.company || !job.role) {
+    alert("Please fill in all required fields.");
+    return;
+  }
 
   if (editIndex === null) {
     jobs.push(job);
@@ -58,19 +59,18 @@ form.addEventListener("submit", function (e) {
     editIndex = null;
   }
 
-  localStorage.setItem("jobs", JSON.stringify(jobs));
-  form.reset();
-  displayJobs();
+  saveAndRefresh();
 });
 
-// DELETE
+// DELETE JOB
 function deleteJob(index) {
+  if (!confirm("Delete this job?")) return;
+
   jobs.splice(index, 1);
-  localStorage.setItem("jobs", JSON.stringify(jobs));
-  displayJobs();
+  saveAndRefresh();
 }
 
-// EDIT
+// EDIT JOB
 function editJob(index) {
   const job = jobs[index];
 
@@ -80,14 +80,17 @@ function editJob(index) {
   document.getElementById("notes").value = job.notes;
 
   editIndex = index;
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// SEARCH
+// SEARCH FUNCTION
 searchInput.addEventListener("input", function () {
   const value = this.value.toLowerCase();
 
   const filtered = jobs.filter(job =>
-    job.company.toLowerCase().includes(value)
+    job.company.toLowerCase().includes(value) ||
+    job.role.toLowerCase().includes(value)
   );
 
   displayJobs(filtered);
@@ -96,13 +99,23 @@ searchInput.addEventListener("input", function () {
 // DASHBOARD
 function updateDashboard() {
   document.getElementById("total").textContent = jobs.length;
+
   document.getElementById("interview").textContent =
     jobs.filter(j => j.status === "Interview").length;
+
   document.getElementById("offer").textContent =
     jobs.filter(j => j.status === "Offer").length;
+
   document.getElementById("rejected").textContent =
     jobs.filter(j => j.status === "Rejected").length;
 }
 
-// INIT
+// SAVE + REFRESH
+function saveAndRefresh() {
+  localStorage.setItem("jobs", JSON.stringify(jobs));
+  form.reset();
+  displayJobs();
+}
+
+// INITIAL LOAD
 displayJobs();
