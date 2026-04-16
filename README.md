@@ -19,7 +19,9 @@ Job-Tracker is a web-based application designed to help users efficiently manage
 https://abdul831.github.io/job-tracker/
 
 ## 📷 Screenshots
-(Adding screenshots soon after deployment)
+![Homepage](images/homepage.png)
+![Dashboard](images/dashboard.png)
+![Form](images/form.png)
 
 ## 💡 Inspiration
 This project was built to solve the challenge of managing multiple job applications efficiently and staying organized during the job search process.
