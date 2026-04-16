@@ -12,7 +12,12 @@ function displayJobs(data = jobs) {
   jobList.innerHTML = "";
 
   if (data.length === 0) {
-    jobList.innerHTML = "<p>No applications yet. Start tracking now!</p>";
+    jobList.innerHTML = `
+  <div style="text-align:center;color:#777;">
+    <p>No applications yet</p>
+    <small>Start by adding your first job 🚀</small>
+  </div>
+`;
     return;
   }
 
@@ -20,14 +25,32 @@ function displayJobs(data = jobs) {
     const div = document.createElement("div");
     div.classList.add("job");
 
-    div.innerHTML = `
-      <h3>${job.company}</h3>
-      <p><strong>${job.role}</strong></p>
-      <p>Status: ${job.status}</p>
-      <p>${job.notes || ""}</p>
-      <button onclick="editJob(${index})">Edit</button>
-      <button onclick="deleteJob(${index})">Delete</button>
-    `;
+    const statusColor =
+  job.status === "Applied" ? "#6b7280" :
+  job.status === "Interview" ? "#3b82f6" :
+  job.status === "Offer" ? "#10b981" :
+  "#ef4444";
+
+div.innerHTML = `
+  <h3>${job.company}</h3>
+  <p><strong>${job.role}</strong></p>
+
+  <span style="
+    background:${statusColor};
+    color:white;
+    padding:4px 8px;
+    border-radius:5px;
+    font-size:12px;
+  ">
+    ${job.status}
+  </span>
+
+  <p>${job.notes || ""}</p>
+  <p><small>Applied on: ${job.date || "N/A"}</small></p>
+
+  <button onclick="editJob(${index})">Edit</button>
+  <button onclick="deleteJob(${index})">Delete</button>
+`;
 
     jobList.appendChild(div);
   });
@@ -40,11 +63,12 @@ form.addEventListener("submit", function (e) {
   e.preventDefault();
 
   const job = {
-    company: document.getElementById("company").value.trim(),
-    role: document.getElementById("role").value.trim(),
-    status: document.getElementById("status").value,
-    notes: document.getElementById("notes").value.trim()
-  };
+  company: document.getElementById("company").value,
+  role: document.getElementById("role").value,
+  status: document.getElementById("status").value,
+  notes: document.getElementById("notes").value,
+  date: new Date().toLocaleDateString()
+};
 
   // VALIDATION
   if (!job.company || !job.role) {
