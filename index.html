@@ -7,49 +7,69 @@
 </head>
 <body>
 
-<header>
-  <h1>JobTracker</h1>
-  <p>Track your job applications smartly</p>
+<header class="header">
+  <h1>JobTrackr</h1>
+  <p>Manage your job applications efficiently</p>
 </header>
 
-<section class="container">
+<main class="container">
 
-  <!-- FORM -->
-  <form id="jobForm">
-    <input type="text" id="company" placeholder="Company Name" required>
-    <input type="text" id="role" placeholder="Job Role" required>
+  <!-- FORM CARD -->
+  <div class="card form-card">
+    <h2>Add Application</h2>
 
-    <select id="status">
-      <option value="Applied">Applied</option>
-      <option value="Interview">Interview</option>
-      <option value="Offer">Offer</option>
-      <option value="Rejected">Rejected</option>
-    </select>
+    <form id="jobForm">
+      <label>Company</label>
+      <input type="text" id="company" required>
 
-    <textarea id="notes" placeholder="Notes"></textarea>
+      <label>Role</label>
+      <input type="text" id="role" required>
 
-    <button type="submit">Add Job</button>
-  </form>
+      <label>Status</label>
+      <select id="status">
+        <option>Applied</option>
+        <option>Interview</option>
+        <option>Offer</option>
+        <option>Rejected</option>
+      </select>
 
-  <!-- SEARCH -->
-  <input type="text" id="search" placeholder="Search company...">
+      <label>Notes</label>
+      <textarea id="notes"></textarea>
+
+      <button type="submit">Save Application</button>
+    </form>
+  </div>
 
   <!-- DASHBOARD -->
   <div id="dashboard">
-    <div class="card"><h3>Total</h3><p id="total">0</p></div>
-    <div class="card"><h3>Interview</h3><p id="interview">0</p></div>
-    <div class="card"><h3>Offer</h3><p id="offer">0</p></div>
-    <div class="card"><h3>Rejected</h3><p id="rejected">0</p></div>
+    <div class="stat total">
+      <h3>Total</h3>
+      <p id="total">0</p>
+    </div>
+    <div class="stat interview">
+      <h3>Interviews</h3>
+      <p id="interview">0</p>
+    </div>
+    <div class="stat offer">
+      <h3>Offers</h3>
+      <p id="offer">0</p>
+    </div>
+    <div class="stat rejected">
+      <h3>Rejected</h3>
+      <p id="rejected">0</p>
+    </div>
   </div>
 
+  <!-- SEARCH -->
+  <input type="text" id="search" placeholder="🔍 Search company...">
+
   <!-- JOB LIST -->
-  <h2>Applications</h2>
   <div id="jobList"></div>
 
-</section>
+</main>
 
 <footer>
-  <p>Built by Abdul Rahaman Salifu</p>
+  <p>© 2026 Abdul Rahaman Salifu</p>
 </footer>
 
 <script src="script.js"></script>
