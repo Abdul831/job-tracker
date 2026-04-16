@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JobTracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>JobTracker</h1>
+  <p>Track your job applications smartly</p>
+</header>
+
+<section class="container">
+
+  <!-- FORM -->
+  <form id="jobForm">
+    <input type="text" id="company" placeholder="Company Name" required>
+    <input type="text" id="role" placeholder="Job Role" required>
+
+    <select id="status">
+      <option value="Applied">Applied</option>
+      <option value="Interview">Interview</option>
+      <option value="Offer">Offer</option>
+      <option value="Rejected">Rejected</option>
+    </select>
+
+    <textarea id="notes" placeholder="Notes"></textarea>
+
+    <button type="submit">Add Job</button>
+  </form>
+
+  <!-- SEARCH -->
+  <input type="text" id="search" placeholder="Search company...">
+
+  <!-- DASHBOARD -->
+  <div id="dashboard">
+    <div class="card"><h3>Total</h3><p id="total">0</p></div>
+    <div class="card"><h3>Interview</h3><p id="interview">0</p></div>
+    <div class="card"><h3>Offer</h3><p id="offer">0</p></div>
+    <div class="card"><h3>Rejected</h3><p id="rejected">0</p></div>
+  </div>
+
+  <!-- JOB LIST -->
+  <h2>Applications</h2>
+  <div id="jobList"></div>
+
+</section>
+
+<footer>
+  <p>Built by Abdul Rahaman Salifu</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
