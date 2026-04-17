@@ -27,7 +27,7 @@ https://abdul831.github.io/job-tracker/
 This project was built to solve the challenge of managing multiple job applications efficiently and staying organized during the job search process.
 
 ## 👨‍💻 Author
-**Abdul Rahaman Salifu**  
+**Abdul Rahaman Nantogmah Salifu**  
 - salifuabdulrahaman69@gmail.com
 - GitHub: https://github.com/Abdul831  
 - LinkedIn: www.linkedin.com/in/abdul-rahaman-nantogmah-salifu-733481247
