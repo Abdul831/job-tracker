@@ -87,6 +87,15 @@ button:hover {
   text-align: center;
 }
 
+.status-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 20px;
+  font-size: 12px;
+  margin: 8px 0;
+}
+
 .total { background: #6b7280; }
 .interview { background: #3b82f6; }
 .offer { background: #10b981; }
@@ -110,6 +119,20 @@ button:hover {
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
+.job {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.actions {
+  margin-top: 10px;
+}
+
+.actions button {
+  margin-right: 8px;
+}
+
 .job button {
   background: #e5e7eb;
   color: #333;
@@ -128,6 +151,12 @@ footer {
   text-align: center;
   padding: 20px;
   color: #777;
+}
+
+.empty-state {
+  text-align: center;
+  color: #888;
+  padding: 20px;
 }
 
 /* MOBILE */
