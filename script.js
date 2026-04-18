@@ -13,9 +13,9 @@ function displayJobs(data = jobs) {
 
   if (data.length === 0) {
     jobList.innerHTML = `
-  <div style="text-align:center;color:#777;">
+  <div class="empty-state">
     <p>No applications yet</p>
-    <small>Start by adding your first job 🚀</small>
+    <small>Start tracking your first job 🚀</small>
   </div>
 `;
     return;
@@ -35,21 +35,17 @@ div.innerHTML = `
   <h3>${job.company}</h3>
   <p><strong>${job.role}</strong></p>
 
-  <span style="
-    background:${statusColor};
-    color:white;
-    padding:4px 8px;
-    border-radius:5px;
-    font-size:12px;
-  ">
+  <span class="status-badge" style="background:${statusColor}">
     ${job.status}
   </span>
 
   <p>${job.notes || ""}</p>
-  <p><small>Applied on: ${job.date || "N/A"}</small></p>
+  <p class="date">Applied on: ${job.date || "N/A"}</p>
 
-  <button onclick="editJob(${index})">Edit</button>
-  <button onclick="deleteJob(${index})">Delete</button>
+  <div class="actions">
+    <button onclick="editJob(${index})">Edit</button>
+    <button onclick="deleteJob(${index})">Delete</button>
+  </div>
 `;
 
     jobList.appendChild(div);
@@ -63,10 +59,10 @@ form.addEventListener("submit", function (e) {
   e.preventDefault();
 
   const job = {
-  company: document.getElementById("company").value,
-  role: document.getElementById("role").value,
+  company: document.getElementById("company").value.trim(),
+  role: document.getElementById("role").value.trim(),
   status: document.getElementById("status").value,
-  notes: document.getElementById("notes").value,
+  notes: document.getElementById("notes").value.trim(),
   date: new Date().toLocaleDateString()
 };
 
