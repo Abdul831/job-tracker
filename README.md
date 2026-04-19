@@ -28,6 +28,5 @@ This project was built to solve the challenge of managing multiple job applicati
 
 ## 👨‍💻 Author
 **Abdul Rahaman Nantogmah Salifu**  
-- salifuabdulrahaman69@gmail.com
-- GitHub: https://github.com/Abdul831  
+- salifuabdulrahaman69@gmail.com  
 - LinkedIn: www.linkedin.com/in/abdul-rahaman-nantogmah-salifu-733481247
